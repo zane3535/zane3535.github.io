@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neon Games Zone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #0a0a12;
+            --neon1: #00f7ff;
+            --neon2: #b400ff;
+            --card-bg: #111122;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #14142b, var(--bg));
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 15px 20px;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon1), 0 0 20px var(--neon2);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        #stats {
+            color: var(--neon1);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon1);
+            border-radius: 25px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.1);
+        }
+
+        #searchBar:focus {
+            box-shadow: 0 0 20px var(--neon1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--neon2);
+            color: var(--neon2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--neon2);
+            color: white;
+            box-shadow: 0 0 15px var(--neon2);
+        }
+
+        #games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon1);
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3), 0 0 30px rgba(180, 0, 255, 0.2);
+        }
+
+        .game img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #000;
+        }
+
+        .game h3 {
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--neon1);
+            color: var(--neon1);
+            text-transform: uppercase;
+        }
+
+        #noResults {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            color: var(--neon2);
+            font-style: italic;
+            display: none;
+        }
+
+        #sentinel {
+            height: 50px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>⚡ NEON ZONE ⚡</h1>
+    <div id="stats">Games: <span id="gameCount">0</span></div>
+</header>
+
+<div class="controls">
+    <input type="text" id="searchBar" placeholder="Search for a game...">
+    <div id="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+    </div>
+</div>
+
+<div id="games">
+    <div id="noResults">No games found in this zone...</div>
+</div>
+<div id="sentinel"></div>
+
+<script>
+    const jsonURL = "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
+    const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
+    const htmlURL  = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
+    
+    let allGames = [];
+    let filteredGames = [];
+    let activeCategory = "all";
+    let currentIndex = 0;
+    const itemsPerLoad = 12;
+
+    const container = document.getElementById("games");
+    const noResultsEl = document.getElementById("noResults");
+    const searchBar = document.getElementById("searchBar");
+    const gameCountEl = document.getElementById("gameCount");
+    const filterContainer = document.getElementById("filters");
+
+    async function init() {
+        try {
+            const r = await fetch(jsonURL);
+            const data = await r.json();
+            allGames = data.filter(g => typeof g.name === "string" && !g.name.startsWith("[!]"));
+            createFilters();
+            applyFilters();
+        } catch (e) { console.error(e); }
+    }
+
+    function createFilters() {
+        const categories = new Set();
+        allGames.forEach(g => (g.special || []).forEach(tag => categories.add(tag)));
+        categories.forEach(cat => {
+            const btn = document.createElement("button");
+            btn.className = "filter-btn";
+            btn.textContent = cat;
+            btn.dataset.category = cat;
+            btn.onclick = () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = cat;
+                applyFilters();
+            };
+            filterContainer.appendChild(btn);
+        });
+        document.querySelector('[data-category="all"]').onclick = (e) => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            activeCategory = "all";
+            applyFilters();
+        };
+    }
+
+    function applyFilters() {
+        const searchTerm = searchBar.value.toLowerCase();
+        filteredGames = allGames.filter(game => {
+            const matchesSearch = game.name.toLowerCase().includes(searchTerm);
+            const matchesCat = activeCategory === "all" || (game.special || []).includes(activeCategory);
+            return matchesSearch && matchesCat;
+        });
+
+        gameCountEl.textContent = filteredGames.length;
+        Array.from(container.children).forEach(child => { if (child.id !== "noResults") child.remove(); });
+        noResultsEl.style.display = filteredGames.length === 0 ? "block" : "none";
+        currentIndex = 0;
+        loadMore();
+    }
+
+    function loadMore() {
+        const nextBatch = filteredGames.slice(currentIndex, currentIndex + itemsPerLoad);
+        nextBatch.forEach(game => {
+            const card = document.createElement("div");
+            card.className = "game";
+            const coverImg = game.cover.replace("{COVER_URL}", coverURL);
+            const gameSrc = game.url.replace("{HTML_URL}", htmlURL);
+
+            card.innerHTML = `
+                <img src="${coverImg}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/180x140?text=Image+Error'">
+                <h3>${game.name}</h3>
+                <div class="tags">${(game.special || []).map(s => `<span class="tag">${s}</span>`).join("")}</div>
+            `;
+
+            card.onclick = async () => {
+                try {
+                    const res = await fetch(gameSrc);
+                    const html = await res.text();
+                    
+                    // This replaces the current window content entirely
+                    document.open();
+                    document.write(html);
+                    document.close();
+                } catch (e) {
+                    console.error("Failed to load game:", e);
+                }
+            };
+            container.appendChild(card);
+        });
+        currentIndex += itemsPerLoad;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && currentIndex < filteredGames.length) {
+            loadMore();
+        }
+    }, { threshold: 0.1 });
+
+    observer.observe(document.getElementById("sentinel"));
+    searchBar.oninput = applyFilters;
+    init();
+</script>
+
+</body>
+</html>
