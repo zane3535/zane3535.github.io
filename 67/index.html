@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love learning</title>
+    <script src="/sail/baremux/index.js"></script>
+    <script src="/sail/scram/scramjet.all.js"></script>
+    <script>
+        navigator.serviceWorker.register("/sail/sw.js")
+    </script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        iframe {
+            height: 100vh;
+            width: 100vw;
+            background: #cfcfcf;
+            border: none;
+        }
+        #controls { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <input type="text" id="bar">
+        <button onclick="nav()">Go</button>
+    </div>
+    
+    <iframe src="about:blank" id="frame"></iframe>
+
+    <script>
+        const frame = document.getElementById("frame");
+        const bar = document.getElementById("bar");
+
+        const wispUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/wisp/";
+        
+        const connection = new BareMux.BareMuxConnection("/sail/baremux/worker.js")
+        connection.setTransport("/sail/libcurl/index.mjs", [{ websocket: wispUrl }])
+
+        const { ScramjetController } = $scramjetLoadController()
+        const scramjet = new ScramjetController({
+            files: {
+                all: "/sail/scram/scramjet.all.js",
+                wasm: "/sail/scram/scramjet.wasm.wasm",
+                sync: "/sail/scram/scramjet.sync.js"
+            },
+            prefix: "/sail/go/"
+        })
+        scramjet.init()
+
+        function formatUrl(url) {
+            if (!url) return "";
+            if (!url.includes(".")) {
+                return "https://search.brave.com/search?q=" + encodeURIComponent(url);
+            } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                return "https://" + url;
+            }
+            return url;
+        }
+
+        function nav(targetUrl) {
+            let url = targetUrl || bar.value.trim();
+            if (!url) return;
+            frame.src = scramjet.encodeUrl(formatUrl(url));
+        }
+
+        window.addEventListener("load", () => {
+            const params = new URLSearchParams(window.location.search);
+            const go = params.get("go");
+            if (go) {
+                nav(go);
+            }
+        });
+
+        bar.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") nav();
+        });
+    </script>  
+</body>
+</html>
