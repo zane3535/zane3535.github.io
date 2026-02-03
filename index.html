@@ -5,6 +5,9 @@
 <title>Zane Gamez</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="google-site-verification" content="UH4TWQbIOPSWvnFyIykY8XlsFwkDltZ7qeNsO0-moHM">
+<meta name="google-site-verification" content="CFJpG9eFtNxnrjtYqys5twLUqpUgLZF9tIbMr-TxlFw">
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMCE2493MV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -89,11 +92,13 @@ iframe {
   width: 100%;
   height: 100%;
   border: none;
+  background: #000;
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
   <!-- SIDEBAR -->
@@ -101,64 +106,76 @@ iframe {
 
     <!-- HOME -->
     <div class="nav-btn" onclick="showHome()">
-      <svg viewBox="0 0 512 512"><path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208z"/></svg>
+      <svg viewBox="0 0 512 512">
+        <path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208z"/>
+      </svg>
     </div>
 
     <!-- GAMES -->
     <div class="nav-btn" onclick="showGames()">
-      <svg viewBox="0 0 640 512"><path d="M448 64c106 0 192 86 192 192S554 448 448 448l-256 0C86 448 0 362 0 256S86 64 192 64l256 0z"/></svg>
+      <svg viewBox="0 0 640 512">
+        <path d="M448 64c106 0 192 86 192 192S554 448 448 448l-256 0C86 448 0 362 0 256S86 64 192 64l256 0z"/>
+      </svg>
     </div>
 
     <!-- PARTNERS -->
     <div class="nav-btn" onclick="showPartners()">
-      <svg viewBox="0 0 576 512"><path d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9"/></svg>
+      <svg viewBox="0 0 576 512">
+        <path d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9"/>
+      </svg>
     </div>
 
     <!-- PROXY -->
     <div class="nav-btn" onclick="showProxy()">
       <svg viewBox="0 0 512 512">
-        <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0z"/>
+        <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48z"/>
       </svg>
     </div>
 
     <!-- DISCORD -->
     <div class="nav-btn" onclick="window.open('https://discord.gg/Egavtd9fN9','_blank')">
-      <svg viewBox="0 0 576 512"><path d="M492.5 69.8c-38.1-17.5-78.4-30"/></svg>
+      <svg viewBox="0 0 576 512">
+        <path d="M492.5 69.8C454.4 52.3 414.1 39.8 372.8 32.7"/>
+      </svg>
     </div>
 
   </div>
 
-  <!-- PAGE CONTENT -->
+  <!-- CONTENT -->
   <div class="page" id="page"></div>
 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+function loadPage(url) {
   const page = document.getElementById("page");
+  page.innerHTML = "";
 
-  function loadGame(url) {
-    page.innerHTML = "";
-    const iframe = document.createElement("iframe");
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    page.appendChild(iframe);
-  }
+  const iframe = document.createElement("iframe");
+  iframe.src = url;
+  iframe.allowFullscreen = true;
+  iframe.referrerPolicy = "no-referrer";
+  page.appendChild(iframe);
+}
 
-  window.showHome = () =>
-    loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/home.html");
+function showHome() {
+  loadPage("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/home.html");
+}
 
-  window.showGames = () =>
-    loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/games.html");
+function showGames() {
+  loadPage("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/games.html");
+}
 
-  window.showPartners = () =>
-    loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/partners.html");
+function showPartners() {
+  loadPage("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/partners.html");
+}
 
-  window.showProxy = () =>
-    loadGame("https://zane-tutors.b-cdn.net/");
+function showProxy() {
+  loadPage("https://gammaray-11123213.vercel.app/");
+}
 
-  showHome();
-});
+// default page
+showHome();
 </script>
 
 </body>
