@@ -164,33 +164,28 @@
   document.addEventListener("DOMContentLoaded", () => {
     const page = document.getElementById("page");
 
-    window.loadGame = async function (file) {
-      try {
-        const response = await fetch(`${file}`); 
-        
-        if (!response.ok) throw new Error("File not found");
-        const htmlContent = await response.text();
+    window.loadGame = function (file) {
+      page.innerHTML = "";
+      const iframe = document.createElement("iframe");
 
-        page.innerHTML = "";
-        const iframe = document.createElement("iframe");
-        
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.allowFullscreen = true;
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
+      iframe.allowFullscreen = true;
 
-        iframe.srcdoc = htmlContent;
-
-        page.appendChild(iframe);
-      } catch (err) {
-        console.error("Error loading game:", err);
+      // navigate iframe directly to the local file so relative paths resolve correctly
+      iframe.src = file;
+      iframe.addEventListener('error', () => {
+        console.error('Error loading game:', file);
         page.innerHTML = "Failed to load content.";
-      }
+      });
+
+      page.appendChild(iframe);
     };
 
-    window.showHome = () => loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/home.html");
-    window.showGames = () => loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/games.html");
-    window.showPartners = () => loadGame("https://cdn.jsdelivr.net/gh/zane3535/zane3535.github.io@main/src/partners.html");
+    window.showHome = () => loadGame("/src/home.html");
+    window.showGames = () => loadGame("/src/games.html");
+    window.showPartners = () => loadGame("/src/partners.html");
 
     showHome();
   });
