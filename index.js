@@ -2,19 +2,25 @@ import "dotenv/config";
 import http from "node:http";
 import express from "express";
 import chalk from "chalk";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 
 app.get("/check", (req, res) => res.status(200).send("OK"));
 
 
-const server = http.createServer();
+app.use(express.static(path.join(__dirname, "/"), {
+    extensions: ["html", "htm"],
+    index: "index.html"
+}));
 
-server.on("request", (req, res) => {
-  app(req, res);
-});
+
+const server = http.createServer();
+server.on("request", (req, res) => { app(req, res); });
 
 server.on("upgrade", (req, socket, head) => {
   if (req.url.startsWith("/wisp/")) {
@@ -24,7 +30,7 @@ server.on("upgrade", (req, socket, head) => {
   }
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 server.listen(PORT, () => {
   console.log(chalk.green(`🚀 UBX WISP SERVER LIVE | Port ${PORT}`));
 });
