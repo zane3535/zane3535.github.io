@@ -307,14 +307,7 @@ setTimeout(()=>{
         points: [
           "HTML defines the structure (headings, text, links).",
           "CSS controls appearance (colors, layout, spacing).",
-          "JavaScript adds behavior (actions, response to events)."
-        ],
-        code: {
-          html: "<!doctype html>\n<html>\n  <head>\n    <meta charset='utf-8'>\n    <title>Hello DEMON</title>\n  </head>\n  <body>\n    <h1 id='greet'>Hello, DEMON!</h1>\n    <button id='btn'>Click me</button>\n  </body>\n</html>",
-          css: "body{font-family:Inter, sans-serif;padding:18px;background:#f7f7f7}\nh1{color:#ff2e2e}\nbutton{padding:8px 12px;border-radius:6px;border:none;background:#00e5ff}",
-          js: "document.getElementById('btn').addEventListener('click', ()=> alert('Hello, DEMON!'))"
-        }
-      }
+          "JavaScript adds behavior (actions, response to events)
     };
     let current = 'intro';
     let currentTab = 'html';
@@ -368,11 +361,6 @@ setTimeout(()=>{
         <body style="font-family:Inter,system-ui;margin:18px">
           <h2>Resources</h2>
           <ul>
-            <li><a href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank">MDN — Web Learning</a></li>
-            <li><a href="https://www.freecodecamp.org" target="_blank">freeCodeCamp</a></li>
-            <li><a href="https://www.theodinproject.com" target="_blank">The Odin Project</a></li>
-            <li><a href="https://codepen.io" target="_blank">CodePen</a></li>
-          </ul>
         </body></html>`;
       win.document.write(html); win.document.close();
     });
