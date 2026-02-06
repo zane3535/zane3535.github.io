@@ -1,288 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GAMES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #0a0a12;
+            --neon1: #00f7ff;
+            --neon2: #b400ff;
+            --card-bg: #111122;
+        }
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-1L129B4T5F');
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3941775107829088" crossorigin="anonymous"></script>
-  <style>
-    * { box-sizing: border-box; margin:0; padding:0; }
-    html,body { height:100%; width:100%; overflow:auto; font-family:Inter, "Orbitron", "Share Tech Mono", system-ui, sans-serif; -webkit-font-smoothing:antialiased; background:#000; color:#00faff; }
-    .center-content {
-      position:fixed; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:14px; background:black; z-index:1000; color:red; text-align:center;
-    }
-    .loader-gif { width:350px; height:auto; }
-    .loading-text { font-size:3em; text-shadow: 0 0 10px red, 0 0 30px red; font-family: "Orbitron", sans-serif; }
-    iframe.fullpage {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      z-index: 99999;
-      pointer-events: auto;
-      background: white;
-    }
-    
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .learn-hub {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 28vh; 
-      max-height: 28vh;
-      min-height: 220px;
-      padding: 12px 18px;
-      pointer-events: auto;
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 12px;
-      align-items:stretch;
-      z-index: 10; 
-    }
-    .hub-card {
-      width: 94vw;
-      margin: 0 auto;
-      background: linear-gradient(180deg, rgba(10,10,10,0.98), rgba(5,5,5,0.98));
-      border-radius: 12px;
-      border: 1px solid rgba(139,0,0,0.25);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,229,255,0.02);
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:12px;
-      padding:12px;
-      height:100%;
-      overflow:hidden; 
-    }
-    .sidebar;
-      overflow:hidden;
-    }
-    .num { min-width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(255,46,46,0.06); color: #ff2e2e; font-weight:700; }
-    .editor {
-      background:#050505; border-radius:10px; padding:8px; display:flex; flex-direction:column; border:1px solid rgba(255,46,46,0.04); height:100%;
-    }
-    .tabs { display:flex; gap:8px; margin-bottom:8px; }
-    .tab { padding:6px 8px; border-radius:8px; background:rgba(255,255,255,0.01); color:#9aa3a8; cursor:pointer; font-size:12px; }
-    .tab.active { background:linear-gradient(90deg, rgba(0,229,255,0.03), rgba(255,46,46,0.03)); color:#00faff; border:1px solid rgba(0,229,255,0.04); }
-    textarea.code { width:100%; height: calc(100% - 86px); resize:none; background:#070707; color:#bff9ff; border-radius:8px; padding:8px; font-family:monospace; font-size:12px; border:1px solid rgba(0,229,255,0.03); }
-    .controls { display:flex; gap:8px; align-items:center; margin-top:8px; }
-    .run-btn { background:linear-gradient(90deg,#ff2e2e,#ff6b6b); padding:8px 10px; border-radius:8px; border:none; color:white; font-weight:700; cursor:pointer; font-size:13px; }
-    .reset-btn { background:transparent; border:1px solid rgba(255,46,46,0.06); padding:6px 8px; border-radius:8px; color:#ff2e2e; cursor:pointer; font-size:13px; }
-    .live-frame { margin-top:8px; border-radius:6px; border:1px solid rgba(0,229,255,0.03); width:100%; height:100px; background:white; overflow:hidden; }
-    @media (max-width:1000px) {
-      .learn-hub { height: 36vh; }
-      .hub-card { grid-template-columns: 1fr; grid-template-rows: auto 1fr; height:100%; }
-      .live-frame { height:120px; }
-    }
-    
-*{margin:0;padding:0;box-sizing:border-box}
+        body {
+            background: radial-gradient(circle at top, #14142b, var(--bg));
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
 
-.center-content{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:radial-gradient(circle at center,#160000,#000 70%);
-  z-index:100000;
-  transition:opacity .6s ease,visibility .6s ease
-}
-.center-content.hide{
-  opacity:0;
-  visibility:hidden
-}
+        header {
+            text-align: center;
+            padding: 40px 15px 20px;
+        }
 
-.demon-loader{
-  width:300px;
-  aspect-ratio:1;
-  display:grid;
-  border:6px solid transparent;
-  border-radius:50%;
-  border-right-color:#ff3b3b;
-  filter:drop-shadow(0 0 20px rgba(255,60,60,.9));
-  animation:spin 1.1s linear infinite
-}
+        header h1 {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon1), 0 0 20px var(--neon2);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
 
-.demon-loader::before,
-.demon-loader::after{
-  content:"";
-  grid-area:1/1;
-  border-radius:50%;
-  border:inherit
-}
+        #stats {
+            color: var(--neon1);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
 
-.demon-loader::before{
-  margin:20px;
-  border-right-color:#ff1f1f;
-  filter:drop-shadow(0 0 18px rgba(255,40,40,.9));
-  animation:spin 1.9s linear infinite reverse
-}
+        .controls {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
 
-.demon-loader::after{
-  margin:40px;
-  border-right-color:#c80000;
-  filter:drop-shadow(0 0 16px rgba(200,0,0,.9));
-  animation:spin 2.7s linear infinite
-}
+        #searchBar {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon1);
+            border-radius: 25px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.1);
+        }
 
-.demon-loader span{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  border:6px solid transparent;
-  animation:spin linear infinite
-}
+        #searchBar:focus {
+            box-shadow: 0 0 20px var(--neon1);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-.demon-loader span:nth-child(1){
-  margin:60px;
-  border-right-color:#8b0000;
-  animation-duration:3.4s;
-  animation-direction:reverse
-}
-.demon-loader span:nth-child(2){
-  margin:80px;
-  border-right-color:#a40000;
-  animation-duration:4.2s
-}
-.demon-loader span:nth-child(3){
-  margin:100px;
-  border-right-color:#5c0000;
-  animation-duration:5.1s;
-  animation-direction:reverse
-}
-.demon-loader span:nth-child(4){
-  margin:120px;
-  border-right-color:#ff0000;
-  animation-duration:6.3s
-}
+        #filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-.loading-text{
-  position:absolute;
-  bottom:18%;
-  font-family:Orbitron;
-  font-size:2.5em;
-  letter-spacing:5px;
-  color:#ff2e2e;
-  text-shadow:0 0 18px #ff0000,0 0 50px rgba(255,0,0,.85);
-  animation:flicker 1.3s infinite
-}
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--neon2);
+            color: var(--neon2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
 
-@keyframes spin{
-  to{transform:rotate(1turn)}
-}
-@keyframes flicker{
-  0%,100%{opacity:1}
-  40%{opacity:.6}
-  65%{opacity:1}
-}
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--neon2);
+            color: white;
+            box-shadow: 0 0 15px var(--neon2);
+        }
 
-  </style>
-  
+        #games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
+        .game {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon1);
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.3), 0 0 30px rgba(180, 0, 255, 0.2);
+        }
+
+        .game img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #000;
+        }
+
+        .game h3 {
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--neon1);
+            color: var(--neon1);
+            text-transform: uppercase;
+        }
+
+        #noResults {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            color: var(--neon2);
+            font-style: italic;
+            display: none;
+        }
+
+        #sentinel {
+            height: 50px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-<div class="center-content" id="loading">
-  <div class="demon-loader"></div>
-  <div class="loading-text">Loading</div>
+<header>
+    <h1>Games</h1>
+    <div id="stats">Games: <span id="gameCount">0</span></div>
+</header>
+
+<div class="controls">
+    <input type="text" id="searchBar" placeholder="Search for a game...">
+    <div id="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+    </div>
 </div>
 
-  <div class="learn-hub" id="learnHub" aria-hidden="false">
-    <div class="hub-card" role="application" aria-label="DEMON Learn Hub">
-      <aside class="sidebar" style="width:360px">
-        <div style="display:flex;gap:10px;align-items:center">
-          <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#ff2e2e,#8b0000);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Orbitron">D</div>
-          <div>
-            <div style="font-family:Orbitron;color:#ff2e2e;font-size:14px">DEMON Learn Hub</div>
-          </div>
-        </div>
-        <div style="margin-top:8px;font-weight:700;color:#00faff;font-size:13px">Curriculum</div>
-        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;overflow:hidden">
-          <div style="display:flex;gap:8px;align-items:center"><div class="num">1</div><div><b style="color:#00faff">Intro to Web</b><div style="font-size:11px;color:#9aa3a8">HTML, CSS, JS overview</div></div></div>
-          <div style="display:flex;gap:8px;align-items:center"><div class="num">2</div><div><b style="color:#00faff">HTML</b><div style="font-size:11px;color:#9aa3a8">Structure & semantics</div></div></div>
-          <div style="display:flex;gap:8px;align-items:center"><div class="num">3</div><div><b style="color:#00faff">CSS</b><div style="font-size:11px;color:#9aa3a8">Styling & layout</div></div></div>
-          <div style="display:flex;gap:8px;align-items:center"><div class="num">4</div><div><b style="color:#00faff">JS</b><div style="font-size:11px;color:#9aa3a8">DOM & events</div></div></div>
-          <div style="display:flex;gap:8px;align-items:center"><div class="num">5</div><div><b style="color:#00faff">Project</b><div style="font-size:11px;color:#9aa3a8">Mini</b      <section class="editor" aria-label="Code editor">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <div style="font-family:Orbitron;color:#ff2e2e">Lesson: Intro to Web</div>
-          <div style="font-size:12px;color:#9aa3a8">Live practice — small preview</div>
-        </div>
-        <div class="tabs" role="tablist" style="margin-top:8px">
-          <div class="tab active" data-tab="html">HTML</div>
-          <div class="tab" data-tab="css">CSS</div>
-          <div class="tab" data-tab="js">JS</div>
-        </div>
-        <textarea id="codeEditor" class="code" spellcheck="false" aria-label="Code editor"></textarea>
-        <div class="controls">
-          <button class="run-btn" id="runBtn">Run ▶</button>
-          <button class="reset-btn" id="loadExample">Load Example</button>
-          <div style="flex:1"></div>
-          <button class="reset-btn" id="downloadBtn">Download</button>
-        </div>
-        <div class="live-frame" id="liveWrap" aria-live="polite">
-          <iframe id="liveFrame" style="width:100%;height:100%;border:0;background:white"></iframe>
-        </div>
-      </section>
-    </div>
-  </div>
-<script>
-(function() {
-  const cloakName = localStorage.getItem('cloakName');
-.toLowerCase()) {
-        window.location.href = panicUrl;
-      }
-    });
-  }
+<div id="games">
+    <div id="noResults">No games found in this zone...</div>
+</div>
+<div id="sentinel"></div>
 
-  const advancedURL = localStorage.getItem('advancedURL');
-  if (advancedURL) {
-    const advFrame = document.createElement('iframe');
-    advFrame.src = advancedURL;
-    advFrame.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:999999;';
-    document.body.appendChild(advFrame);
-  }
-})();
-</script>
 <script>
-const loader=document.querySelector(".demon-loader");
-for(let i=0;i<4;i++){
-  loader.appendChild(document.createElement("span"));
-}
-setTimeout(()=>{
-  const wrap=document.getElementById("loading");
-  if(wrap){
-    wrap.classList.add("hide");
-    setTimeout(()=>wrap.remove(),700);
-  }
-},1200);
+    const jsonURL = "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
+    const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
+    const htmlURL  = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
+    
+    let allGames = [];
+    let filteredGames = [];
+    let activeCategory = "all";
+    let currentIndex = 0;
+    const itemsPerLoad = 12;
 
+    const container = document.getElementById("games");
+    const noResultsEl = document.getElementById("noResults");
+    const searchBar = document.getElementById("searchBar");
+    const gameCountEl = document.getElementById("gameCount");
+    const filterContainer = document.getElementById("filters");
+
+    async function init() {
+        try {
+            const r = await fetch(jsonURL);
+            const data = await r.json();
+            allGames = data.filter(g => typeof g.name === "string" && !g.name.startsWith("[!]"));
+            createFilters();
+            applyFilters();
+        } catch (e) { console.error(e); }
+    }
+
+    function createFilters() {
+        const categories = new Set();
+        allGames.forEach(g => (g.special || []).forEach(tag => categories.add(tag)));
+        categories.forEach(cat => {
+            const btn = document.createElement("button");
+            btn.className = "filter-btn";
+            btn.textContent = cat;
+            btn.dataset.category = cat;
+            btn.onclick = () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = cat;
+                applyFilters();
+            };
+            filterContainer.appendChild(btn);
+        });
+        document.querySelector('[data-category="all"]').onclick = (e) => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            activeCategory = "all";
+            applyFilters();
+        };
+    }
+
+    function applyFilters() {
+        const searchTerm = searchBar.value.toLowerCase();
+        filteredGames = allGames.filter(game => {
+            const matchesSearch = game.name.toLowerCase().includes(searchTerm);
+            const matchesCat = activeCategory === "all" || (game.special || []).includes(activeCategory);
+            return matchesSearch && matchesCat;
+        });
+
+        gameCountEl.textContent = filteredGames.length;
+        Array.from(container.children).forEach(child => { if (child.id !== "noResults") child.remove(); });
+        noResultsEl.style.display = filteredGames.length === 0 ? "block" : "none";
+        currentIndex = 0;
+        loadMore();
+    }
+
+    function loadMore() {
+        const nextBatch = filteredGames.slice(currentIndex, currentIndex + itemsPerLoad);
+        nextBatch.forEach(game => {
+            const card = document.createElement("div");
+            card.className = "game";
+            const coverImg = game.cover.replace("{COVER_URL}", coverURL);
+            const gameSrc = game.url.replace("{HTML_URL}", htmlURL);
+
+            card.innerHTML = `
+                <img src="${coverImg}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/180x140?text=Image+Error'">
+                <h3>${game.name}</h3>
+                <div class="tags">${(game.special || []).map(s => `<span class="tag">${s}</span>`).join("")}</div>
+            `;
+
+            card.onclick = async () => {
+                try {
+                    const res = await fetch(gameSrc);
+                    const html = await res.text();
+                    
+                    // if you see this then the author should be Zane, if it is not, SOMBODY SKIDDED THIS LMAO LOL
+                    document.open();
+                    document.write(html);
+                    document.close();
+                } catch (e) {
+                    console.error("Failed to load game:", e);
+                }
+            };
+            container.appendChild(card);
+        });
+        currentIndex += itemsPerLoad;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && currentIndex < filteredGames.length) {
+            loadMore();
+        }
+    }, { threshold: 0.1 });
+
+    observer.observe(document.getElementById("sentinel"));
+    searchBar.oninput = applyFilters;
+    init();
 </script>
-  <script>
-    document.addEventListener("keydown", function(event) {
-      if (event.code === "Backquote") {
-        window.location.href = "https://clever.com";
-      }
-    });
-    window.addEventListener("beforeunload", (e) => {
-      e.preventDefault();
-      e.returnValue = ""
-      if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ runPreview(); }
-    });
-    editor.addEventListener('blur', ()=>{
-      if(lessons[current].code) lessons[current].code[currentTab] = editor.value;
-    });
-    setTimeout(()=> {
-      const loader = document.getElementById('loading');
-      if(loader) loader.remove();
-      const iframe = document.createElement("iframe");
-      iframe.className = "fullpage";
-      iframe.src = "viewnew.html";
-      iframe.setAttribute("aria-hidden", "false");
-      document.body.appendChild(iframe);
-    }, 1000); 
-    document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive:false });
-  </script>
+
 </body>
 </html>
+
