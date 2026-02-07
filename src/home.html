@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>home & pr0xy</title>
     <style>
         :root {
             --neon-pink: #ff00ff;
@@ -15,7 +15,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-purple);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: white;
             display: flex;
@@ -50,16 +50,16 @@
             text-shadow: 
                 0 0 7px #fff,
                 0 0 10px #fff,
-                0 0 21px var(--neon-pink),
-                0 0 42px var(--neon-pink),
-                0 0 82px var(--neon-pink);text-shadow: 
-            letter-spacing: 5px;
+                0 0 21px var(--neon-blue),
+                0 0 42px var(--neon-red),
+                0 0 82px var(--neon-orange);
+                letter-spacing: 5px;
             animation: flicker 2s infinite alternate;
         }
 
         p {
             font-size: 1.2rem;
-            color: var(--neon-blue);
+            color: var(--neon-red);
             text-shadow: 0 0 10px var(--neon-blue);
             margin-top: 1rem;
             letter-spacing: 2px;
@@ -87,14 +87,45 @@
             box-shadow: 0 0 50px var(--neon-blue);
         }
 
+        .search-container {
+            margin-top: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .search-container form {
+            display: flex;
+            align-items: center;
+        }
+
+        .neon-input {
+            padding: 15px;
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-blue);
+            font-size: 1rem;
+            width: 300px;
+            box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-orange);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .neon-input:focus {
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .neon-button {
+            margin-left: 10px;
+        }
+
         @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% {
                 text-shadow: 
                     0 0 7px #fff,
                     0 0 10px #fff,
-                    0 0 21px var(--neon-pink),
-                    0 0 42px var(--neon-pink),
-                    0 0 82px var(--neon-pink);
+                    0 0 21px var(--neon-red),
+                    0 0 42px var(--neon-maroon),
+                    0 0 82px var(--neon-purple);
             }
             20%, 24%, 55% {       
                 text-shadow: none;
@@ -105,10 +136,35 @@
 <body>
 
     <div class="container">
-        <h1>Welcome To <span style="color: var(--neon-blue);">Zane G@mez</span></h1>
-        <p>The ultimate G@M3$ site to P1@Y on!</p>
-        <p>Select an option on the nav bar!</p>
+        <h1>Welcome To <span style="color: var(--neon-red);">Zane G@mez</span></h1>
+        <p>cool g@me site!</p>
+        <p>Select an option on the nav bar or use our Pr0xy! and press shift ctrl r if proxy dont work!nd some games dont work</p>
+        
+        <div class="search-container">
+            <form id="search-form">
+                <input type="text" id="search-input" class="neon-input" placeholder="Search Google or enter URL..." autocomplete="off">
+            </form>
+        </div>
     </div>
+
+    <script>
+
+        //recycled from UBX with permission
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('search-input').value.trim();
+            if (input) {
+               
+                const isUrl = /^https?:\/\//.test(input) || /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(input) && !/\s/.test(input);
+                if (isUrl) {
+                    window.location.href = `/67?go=${encodeURIComponent(input)}`;
+                } else {
+                
+                    window.location.href = `/67?go=https://www.google.com/search?q=${encodeURIComponent(input)}`;
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
