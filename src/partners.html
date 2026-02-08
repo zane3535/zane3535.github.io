@@ -51,17 +51,18 @@
 
         .partners-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
         }
 
         .partner-card {
-            background: var(--card-bg);
-            border: 2px solid #222;
+            background: #000;
+            border: none;
+            border-radius: 4px;
             border-radius: 15px;
-            padding: 30px;
+            padding: 0;
             text-align: center;
             text-decoration: none;
             color: white;
@@ -73,34 +74,75 @@
         }
 
         .partner-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--orange);
-            box-shadow: 0 0 20px rgba(247, 151, 29, 0.3);
+            transform: scale(1.05);
+            z-index: 2;
         }
 
-        .partner-logo {
-            width: 80px;
-            height: 80px;
-            background: #222;
-            border-radius: 50%;
-            margin-bottom: 15px;
+        .partner-thumb-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .partner-img {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            border: 1px solid var(--orange);
+            font-size: 3rem;
+            background: #222;
+        }
+
+        .partner-duration {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: bold;
         }
 
         .partner-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #fff;
+            text-align: left;
+            width: 100%;
+            padding: 0 15px;
+            /* Added padding for text content */
         }
 
         .partner-card p {
-            font-size: 0.9rem;
-            color: #aaa;
+            font-size: 12px;
+            color: #888;
             line-height: 1.4;
+            text-align: left;
+            width: 100%;
+            padding: 0 15px;
+            /* Added padding for text content */
+        }
+
+        .partner-meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+            text-align: left;
+            width: 100%;
+            padding: 0 15px 15px;
+            /* Added padding for text content */
+        }
+
+        .verified-icon {
+            color: #2196F3;
         }
 
         .back-btn {
@@ -134,32 +176,37 @@
     <div class="partners-container">
 
         <a href="https://bloxcraft-ubg.pages.dev" class="partner-card" target="_blank">
-            <div class="partner-logo">🚀</div>
+            <div class="partner-thumb-wrap">
+                <div class="partner-img">🚀</div>
+                <div class="partner-duration">10:45</div>
+            </div>
             <h3>Bloxcraft UBG</h3>
-            <p>The 2nd owner's unblocked game site! It has hundreds and thousands of games and has more games than this
-                site to play with!</p>
+            <p>The 2nd owner's unblocked game site! It has hundreds and thousands of games...</p>
+            <div class="partner-meta">1.2M views • 100% <span class="verified-icon">✔</span></div>
         </a>
 
-        <p>Want to partner? DM one of the owners on Discord! </p>
+        <a href="https://zyra-hub.netlify.app/" class="partner-card" target="_blank">
+            <div class="partner-thumb-wrap">
+                <div class="partner-img">⚡</div>
+                <div class="partner-duration">08:12</div>
+            </div>
+            <h3>Zyra Hub</h3>
+            <p>The coolest site eva!</p>
+            <div class="partner-meta">850K views • 99% <span class="verified-icon">✔</span></div>
+        </a>
+        <a href="https://elite-gamez.github.io/" class="partner-card" target="_blank">
+            <div class="partner-thumb-wrap">
+                <div class="partner-img">🔴</div>
+                <div class="partner-duration">12:30</div>
+            </div>
+            <h3>Elite Gamez</h3>
+            <p>best friends server!</p>
+            <div class="partner-meta">2.4M views • 97% <span class="verified-icon">✔</span></div>
+        </a>
     </div>
+
+    <p>Want to partner? DM one of the owners on Discord! </p>
 
 </body>
 
 </html>
-<div class="partners-container">
-
-    <a href="https://zyra-hub.netlify.app/" class="partner-card" target="_blank">
-        <div class="partner-logo">⚡</div>
-        <h3>Zyra Hub</h3>
-        <p>The coolest site eva!</p>
-    </a>
-    </body>
-
-    </html>
-    <div class="partners-container">
-
-        <a href="https://elite-gamez.github.io/" class="partner-card" target="_blank">
-            <div class="partner-logo">🔴</div>
-            <h3>Elite Gamez</h3>
-            <p>best friends server!</p>
-        </a>

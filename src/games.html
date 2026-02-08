@@ -12,17 +12,17 @@
             --primary-light: rgba(247, 151, 29, 0.2);
             --accent: #ff9100;
             --bg: #000000;
-            --surface: #121212;
-            --border: #222224;
+            --surface: #000000;
+            --border: #1b1b1b;
             --text: #ffffff;
-            --text-muted: #8b8b93;
-            --radius: 12px;
-            --shadow-glow: 0 0 20px rgba(247, 151, 29, 0.2);
+            --text-muted: #888;
+            --radius: 4px;
+            --shadow-glow: 0 0 10px rgba(0, 0, 0, 0.5);
             --warning-red: #cc0000
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background: var(--bg);
             color: var(--text);
             margin: 0;
@@ -30,31 +30,18 @@
             -webkit-font-smoothing: antialiased
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 500px;
-            background: radial-gradient(circle at top center, rgb(255 94 0 / .08), transparent 60%);
-            pointer-events: none;
-            z-index: 0
-        }
-
         header {
-            background: rgb(5 5 5 / .9);
-            border-bottom: 1px solid var(--border);
+            background: #1b1b1b;
+            border-bottom: 1px solid #333;
             position: sticky;
             top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px)
+            z-index: 100
         }
 
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 0.5rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -62,35 +49,7 @@
         }
 
         .logo-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center
-        }
-
-        .version-tag {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: -4px;
-            margin-left: 48px
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: .75rem
-        }
-
-        .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px
+            display: none
         }
 
         .search-container {
@@ -102,10 +61,10 @@
 
         .search-container input,
         .search-container select {
-            padding: .75rem;
-            border: 1px solid var(--border);
+            padding: .5rem;
+            border: 1px solid #333;
             border-radius: var(--radius);
-            background: var(--surface);
+            background: #000;
             color: var(--text);
             outline: none;
             font-size: 13px;
@@ -113,84 +72,113 @@
         }
 
         .search-container input:focus {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow)
+            border-color: var(--primary)
         }
 
         main {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 6rem;
+            padding: 1rem 1.5rem 6rem;
             position: relative;
             z-index: 1
         }
 
         .section-header {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: bold;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: .75rem
-        }
-
-        .section-header::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 2px
+            gap: .75rem;
+            color: #ccc
         }
 
         .zones-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1.5rem
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem
         }
 
         .zone-item {
             background: var(--surface);
-            border: 1px solid var(--border);
+            border: none;
             border-radius: var(--radius);
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             position: relative
         }
 
         .zone-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow)
+            transform: scale(1.05);
+            z-index: 2
+        }
+
+        .zone-thumbnail-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #1a1a1a
         }
 
         .zone-item img {
             width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            background: #1a1a1a
+            height: 100%;
+            object-fit: cover
+        }
+
+        .zone-duration {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: bold
         }
 
         .zone-badge {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: var(--primary);
+            top: 5px;
+            left: 5px;
+            background: rgba(0, 0, 0, 0.7);
             font-size: 9px;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: bold;
+            color: var(--primary);
             z-index: 2
         }
 
+        .zone-info {
+            padding: 8px 0
+        }
+
         .zone-name {
-            padding: .8rem;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .zone-meta {
             font-size: 12px;
-            font-weight: 500;
-            min-height: 35px;
+            color: #888;
             display: flex;
             align-items: center;
-            line-height: 1.2
+            gap: 4px
+        }
+
+        .verified-icon {
+            color: #2196F3;
+            font-size: 12px
         }
 
         #zoneViewer {
@@ -205,7 +193,7 @@
         #ramWarning {
             position: fixed;
             inset: 0;
-            background: rgb(40 0 0 / .95);
+            background: rgb(0 0 0 / .95);
             z-index: 2000;
             display: none;
             flex-direction: column;
@@ -214,25 +202,25 @@
             text-align: center;
             padding: 2rem;
             backdrop-filter: blur(8px);
-            border: 4px solid var(--warning-red)
+            border-top: 4px solid var(--primary)
         }
 
         .btn-proceed {
-            background: var(--warning-red);
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: var(--radius);
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
             cursor: pointer;
             margin-top: 2rem;
             text-transform: uppercase
         }
 
         .zone-header {
-            background: #0a0a0a;
-            border-bottom: 1px solid var(--primary);
+            background: #1b1b1b;
+            border-bottom: 1px solid #333;
             padding: .8rem 1.5rem;
             display: flex;
             align-items: center;
@@ -240,27 +228,27 @@
         }
 
         .btn-secondary {
-            background: rgb(255 255 255 / .08);
-            border: 1px solid var(--border);
-            color: var(--text);
+            background: #2b2b2b;
+            border: 1px solid #333;
+            color: #ccc;
             padding: .5rem 1rem;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
             margin-left: .4rem;
             font-size: 12px;
-            font-weight: 600
+            font-weight: bold
         }
 
         .btn-secondary:hover {
             background: var(--primary);
-            color: #fff
+            color: #000
         }
 
         iframe {
             flex: 1;
             border: none;
             width: 100%;
-            background: #fff
+            background: #000
         }
 
         @media (max-width:900px) {
@@ -347,11 +335,23 @@
         function filterZones() { const query = document.getElementById('searchBar').value.toLowerCase(); const sourceFilter = document.getElementById('filterSource').value; const catFilter = document.getElementById('filterCategory').value; const filtered = allItems.filter(item => { const matchesQuery = item.name.toLowerCase().includes(query); const matchesSource = sourceFilter === 'all' || item.source === sourceFilter; const matchesCat = catFilter === 'all' || (item.special && item.special.includes(catFilter)); return matchesQuery && matchesSource && matchesCat }); renderGrid(filtered) }
         function renderGrid(list) {
             const container = document.getElementById('container'); container.innerHTML = ""; document.getElementById('count').textContent = `(${list.length} builds)`; list.forEach(item => {
-                const div = document.createElement('div'); div.className = 'zone-item'; div.onclick = () => openZone(item); div.innerHTML = `
-                <div class="zone-badge">${item.source.toUpperCase()}</div>
-                <img src="${item.displayCover}" loading="lazy" onerror="this.src='/logo.png'">
-                <div class="zone-name">${item.name}</div>
-            `; container.appendChild(div)
+                const div = document.createElement('div'); div.className = 'zone-item'; div.onclick = () => openZone(item);
+                const views = Math.floor(Math.random() * 900 + 100);
+                const duration = Math.floor(Math.random() * 15 + 5) + ":" + Math.floor(Math.random() * 50 + 10);
+                div.innerHTML = `
+                    <div class="zone-badge">${item.source.toUpperCase()}</div>
+                    <div class="zone-thumbnail-wrap">
+                        <img src="${item.displayCover}" loading="lazy" onerror="this.src='/logo.png'">
+                        <div class="zone-duration">${duration}</div>
+                    </div>
+                    <div class="zone-info">
+                        <div class="zone-name">${item.name}</div>
+                        <div class="zone-meta">
+                            <span>${views}K views</span> • <span>98%</span> 
+                            <span class="verified-icon">✔</span>
+                        </div>
+                    </div>
+                `; container.appendChild(div)
             })
         }
         function openZone(item) {
