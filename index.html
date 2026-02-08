@@ -3,15 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Zane Gamez</title>
+  <title>Zane Gamez | CYBER HUD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="UH4TWQbIOPSWvnFyIykY8XlsFwkDltZ7qeNsO0-moHM" />
-  <meta name="google-site-verification" content="CFJpG9eFtNxnrjtYqys5twLUqpUgLZF9tIbMr-TxlFw" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMCE2493MV"></script>
-  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" href="/android-icon-192x192.png">
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -19,187 +15,259 @@
     gtag('config', 'G-FMCE2493MV');
   </script>
   <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 5px rgba(157, 78, 237, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(157, 78, 237, 0.5);
+      }
+
+      100% {
+        box-shadow: 0 0 5px rgba(157, 78, 237, 0.2);
+      }
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       height: 100vh;
       background: #000;
+      color: #fff;
       display: flex;
-      flex-direction: column;
       overflow: hidden;
+      background: radial-gradient(circle at 20% 50%, #15002b 0%, #000 100%);
     }
 
-    /* Header Styles */
-    .header {
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(10px);
-      height: 65px;
+    /* Sidebar Styles */
+    .sidebar {
+      width: 260px;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid #240046;
       display: flex;
-      align-items: center;
-      padding: 0 20px;
-      gap: 20px;
-      border-bottom: 1px solid #240046;
+      flex-direction: column;
+      padding: 30px 20px;
       z-index: 1000;
-      position: sticky;
-      top: 0;
+      transition: width 0.3s;
+    }
+
+    .logo-container {
+      margin-bottom: 40px;
+      padding-left: 10px;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 2px;
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 900;
       color: #fff;
       text-decoration: none;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
       cursor: pointer;
-      min-width: fit-content;
     }
 
     .logo-box {
       background: #9d4edd;
-      color: #fff;
       padding: 2px 8px;
       border-radius: 4px;
-      margin-left: 4px;
-      box-shadow: 0 0 15px rgba(157, 78, 237, 0.5);
-    }
-
-    .search-bar {
-      flex: 1;
-      max-width: 600px;
-      display: flex;
-      background: #000;
-      border: 1px solid #333;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .search-bar input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #fff;
-      padding: 8px 12px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    .search-bar button {
-      background: #9d4edd;
-      color: #fff;
-      border: none;
-      padding: 0 15px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-
-    .search-bar button:hover {
-      background: #c77dff;
+      margin-left: 6px;
+      font-size: 18px;
+      box-shadow: 0 0 15px rgba(157, 78, 237, 0.6);
     }
 
     .nav-links {
       display: flex;
+      flex-direction: column;
       gap: 15px;
-      align-items: center;
+      flex: 1;
     }
 
     .nav-item {
-      color: #ccc;
+      color: #aaa;
       text-decoration: none;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 700;
+      padding: 12px 15px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: color 0.2s;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid transparent;
     }
 
     .nav-item:hover {
-      color: #9d4edd;
-      text-shadow: 0 0 8px rgba(157, 78, 237, 0.8);
+      color: #fff;
+      background: rgba(157, 78, 237, 0.1);
+      border-color: rgba(157, 78, 237, 0.3);
+      text-shadow: 0 0 10px #9d4edd;
+      transform: translateX(5px);
     }
 
-    /* Content Area */
-    .app {
+    .nav-item.active {
+      background: #9d4edd;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(157, 78, 237, 0.4);
+    }
+
+    /* Main Content Area */
+    .main-wrapper {
       flex: 1;
       display: flex;
+      flex-direction: column;
       overflow: hidden;
+      position: relative;
     }
 
-    .page {
+    .top-bar {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      background: rgba(5, 5, 5, 0.5);
+      border-bottom: 1px solid rgba(157, 78, 237, 0.1);
+    }
+
+    .search-hud {
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      display: flex;
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid #240046;
+      border-radius: 12px;
+      padding: 2px;
+      transition: all 0.3s;
+    }
+
+    .search-hud:focus-within {
+      border-color: #9d4edd;
+      box-shadow: 0 0 15px rgba(157, 78, 237, 0.3);
+    }
+
+    .search-hud input {
       flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 10px 18px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search-hud button {
+      background: #9d4edd;
+      border: none;
+      color: #fff;
+      padding: 0 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 2px;
+      transition: 0.2s;
+    }
+
+    .search-hud button:hover {
+      background: #c77dff;
+      box-shadow: 0 0 10px #c77dff;
+    }
+
+    .content-viewport {
+      flex: 1;
+      position: relative;
       background: #000;
+      animation: fadeIn 0.6s ease-out;
     }
 
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-      background: #000;
+      background: transparent;
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #111;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #333;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #444;
+    /* HUD Decoration */
+    .hud-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, #9d4edd, transparent);
+      height: 1px;
+      width: 100%;
+      opacity: 0.2;
     }
   </style>
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="logo" onclick="showHome()">ZANE<span class="logo-box">G@MEZ</span></div>
-
-    <div class="search-bar">
-      <input type="text" id="global-search" placeholder="Search videos or enter URL..." autocomplete="off">
-      <button onclick="handleGlobalSearch()">Search</button>
+  <nav class="sidebar">
+    <div class="logo-container">
+      <div class="logo" onclick="showHome()">ZANE<span class="logo-box">G@MEZ</span></div>
     </div>
 
-    <nav class="nav-links">
-      <div class="nav-item" onclick="showHome()">HOME</div>
-      <div class="nav-item" onclick="showGames()">GAMES</div>
-      <div class="nav-item" onclick="showPartners()">PARTNERS</div>
-      <div class="nav-item" onclick="window.open('https://discord.gg/Egavtd9fN9', '_blank');">DISCORD</div>
-    </nav>
-  </header>
+    <div class="nav-links">
+      <div class="nav-item" onclick="setActiveNav(this); showHome()"><span>🏠</span> HOME</div>
+      <div class="nav-item" onclick="setActiveNav(this); showGames()"><span>🎮</span> GAMES</div>
+      <div class="nav-item" onclick="setActiveNav(this); showPartners()"><span>🤝</span> PARTNERS</div>
+      <div class="nav-item" onclick="window.open('https://discord.gg/Egavtd9fN9', '_blank');"><span>💬</span> DISCORD
+      </div>
+    </div>
 
-  <div class="app">
-    <div class="page" id="page"></div>
-  </div>
+    <div style="font-size: 10px; color: #444; margin-top: 20px; letter-spacing: 1px;">V4.0 // QUANTUM CORE</div>
+  </nav>
+
+  <main class="main-wrapper">
+    <div class="top-bar">
+      <div class="search-hud">
+        <input type="text" id="global-search" placeholder="Enter URL or search the Matrix..." autocomplete="off">
+        <button onclick="handleGlobalSearch()">GO</button>
+      </div>
+    </div>
+
+    <div class="content-viewport" id="viewport"></div>
+
+    <!-- Decorative HUD elements -->
+    <div class="hud-line" style="top: 0;"></div>
+    <div class="hud-line" style="bottom: 0;"></div>
+  </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const page = document.getElementById("page");
+      const viewport = document.getElementById("viewport");
+
+      window.setActiveNav = (el) => {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        el.classList.add('active');
+      };
 
       window.loadGame = function (file) {
-        page.innerHTML = "";
+        viewport.innerHTML = "";
         const iframe = document.createElement("iframe");
-
         iframe.style.width = "100%";
         iframe.style.height = "100%";
-        iframe.style.border = "none";
         iframe.allowFullscreen = true;
         iframe.src = file;
-
-        page.appendChild(iframe);
+        viewport.appendChild(iframe);
       };
 
       window.showHome = () => loadGame("/src/home.html");
@@ -222,7 +290,9 @@
         if (e.key === 'Enter') handleGlobalSearch();
       });
 
+      // Default to Home
       showHome();
+      setActiveNav(document.querySelector('.nav-item'));
     });
   </script>
 

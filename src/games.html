@@ -10,15 +10,15 @@
             --primary: #9d4edd;
             --primary-hover: #c77dff;
             --primary-light: rgba(157, 78, 237, 0.2);
-            --accent: #7b2cbf;
+            --accent: #5a189a;
             --bg: #000000;
             --surface: #0a0a0a;
             --border: #240046;
             --text: #ffffff;
             --text-muted: #888;
-            --radius: 6px;
-            --shadow-glow: 0 0 15px rgba(157, 78, 237, 0.3);
-            --warning-red: #5a189a
+            --radius: 12px;
+            --shadow-glow: 0 0 20px rgba(157, 78, 237, 0.4);
+            --warning-red: #cc0000
         }
 
         body {
@@ -57,7 +57,11 @@
             display: flex;
             flex: 1;
             max-width: 800px;
-            gap: .5rem
+            gap: .5rem;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 5px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
 
         .search-container input,
@@ -102,17 +106,35 @@
 
         .zone-item {
             background: var(--surface);
-            border: none;
+            border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
         .zone-item:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(157, 78, 237, 0.3);
             z-index: 2
+        }
+
+        .zone-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(157, 78, 237, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .zone-item:hover::before {
+            left: 100%;
         }
 
         .zone-thumbnail-wrap {

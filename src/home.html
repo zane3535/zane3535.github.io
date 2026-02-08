@@ -4,8 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home & pr0xy</title>
+    <title>Zane Gamez | CORE</title>
     <style>
+        @keyframes scanline {
+            0% {
+                bottom: 100%;
+            }
+
+            80% {
+                bottom: 100%;
+            }
+
+            100% {
+                bottom: -100%;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
         :root {
             --accent: #9d4edd;
             --accent-glow: #c77dff;
@@ -16,115 +58,110 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-dark);
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: calc(100vh - 65px);
+            height: 100vh;
             overflow: hidden;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            position: relative;
         }
 
-
+        /* Animated Background */
+        .grid-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(157, 78, 237, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(157, 78, 237, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            z-index: 0;
+            opacity: 0.3;
+        }
 
         .container {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
+            z-index: 10;
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1px solid rgba(157, 78, 237, 0.1);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             margin: 0;
             color: #fff;
-            letter-spacing: -2px;
-            font-weight: bold;
+            letter-spacing: -3px;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
         .hub-logo {
             display: inline-flex;
             align-items: center;
             gap: 2px;
+            color: #fff;
         }
 
         .hub-box {
             background-color: var(--accent);
             color: #fff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-left: 6px;
-            box-shadow: 0 0 20px rgba(157, 78, 237, 0.4);
-            text-transform: uppercase;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-top: 1.5rem;
-            letter-spacing: 1px;
-        }
-
-        .neon-button {
-            margin-top: 3rem;
-            padding: 15px 40px;
-            background: transparent;
-            color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-blue);
-        }
-
-        .neon-button:hover {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-            box-shadow: 0 0 50px var(--neon-blue);
-        }
-
-        .search-container {
-            margin-top: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .search-container form {
-            display: flex;
-            align-items: center;
-        }
-
-        .neon-input {
-            padding: 15px;
-            background: #1b1b1b;
-            color: white;
-            border: 2px solid #333;
-            font-size: 1rem;
-            width: 400px;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .neon-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .neon-button {
+            padding: 5px 15px;
+            border-radius: 8px;
             margin-left: 10px;
+            box-shadow: 0 0 30px rgba(157, 78, 237, 0.6);
+            transform: skew(-10deg);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 2rem;
+            letter-spacing: 5px;
+            font-weight: 200;
+            text-transform: uppercase;
+        }
+
+        .welcome-msg {
+            font-size: 1rem;
+            color: #888;
+            margin-top: 1.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Decoration */
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            z-index: 1;
+            background: linear-gradient(to bottom, transparent, rgba(157, 78, 237, 0.05), transparent);
+            animation: scanline 8s linear infinite;
         }
     </style>
 </head>
 
 <body>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
 
     <div class="container">
-        <h1>Welcome To <span class="hub-logo">Zane <span class="hub-box">G@MEZ</span></span></h1>
-        <p>The #1 G@me Site!</p>
-        <p>Select a category from the top menu or search globally to start playing.</p>
+        <h1><span class="hub-logo">Zane <span class="hub-box">G@MEZ</span></span></h1>
+        <div class="tagline">The Matrix is Open</div>
+        <p class="welcome-msg">Experience the next generation of unblocked gaming. Access thousands of titles through
+            our quantum-link proxy and global library.</p>
     </div>
 
 </body>

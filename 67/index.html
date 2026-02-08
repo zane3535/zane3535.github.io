@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I love learning</title>
+    <title>Zane Gamez | Proxy Tabs</title>
     <script src="/sail/baremux/index.js"></script>
     <script src="/sail/scram/scramjet.all.js"></script>
     <script>
@@ -13,80 +13,269 @@
     <style>
         body {
             margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
 
-        iframe {
-            height: 100vh;
-            width: 100vw;
-            background: #cfcfcf;
-            border: none;
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            background: #0a0a0a;
+            padding: 5px 10px 0;
+            border-bottom: 1px solid #240046;
+            gap: 5px;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        #controls {
+        .tab-bar::-webkit-scrollbar {
             display: none;
         }
 
-        .back-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
+        .tab {
+            display: flex;
+            align-items: center;
+            background: #111;
+            padding: 8px 15px;
+            border-radius: 8px 8px 0 0;
+            font-size: 13px;
+            cursor: pointer;
+            min-width: 120px;
+            max-width: 200px;
+            border: 1px solid #222;
+            border-bottom: none;
+            transition: 0.2s;
+            position: relative;
+            color: #888;
+        }
+
+        .tab:hover {
+            background: #161616;
+            color: #ccc;
+        }
+
+        .tab.active {
             background: #9d4edd;
             color: #fff;
-            padding: 8px 16px;
-            text-decoration: none;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
+            border-color: #9d4edd;
+            box-shadow: 0 -5px 15px rgba(157, 78, 237, 0.2);
+        }
+
+        .tab-title {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab-close {
+            margin-left: 10px;
             font-size: 14px;
-            border-radius: 4px;
-            z-index: 10000;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 15px rgba(157, 78, 237, 0.4);
+            opacity: 0.5;
+            transition: 0.2s;
         }
 
-        .back-btn:hover {
-            background: #c77dff;
-            transform: scale(1.05);
+        .tab-close:hover {
+            opacity: 1;
+            color: #ff4d4d;
         }
 
-        .back-btn:active {
-            transform: scale(0.95);
+        .new-tab-btn {
+            background: rgba(157, 78, 237, 0.1);
+            border: 1px solid rgba(157, 78, 237, 0.3);
+            color: #9d4edd;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .new-tab-btn:hover {
+            background: #9d4edd;
+            color: #fff;
+            box-shadow: 0 0 10px #9d4edd;
+        }
+
+        /* Address Bar area */
+        .address-bar-container {
+            display: flex;
+            padding: 10px;
+            background: #0a0a0a;
+            gap: 10px;
+            border-bottom: 1px solid #111;
+        }
+
+        #bar {
+            flex: 1;
+            background: #111;
+            border: 1px solid #222;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        #bar:focus {
+            border-color: #9d4edd;
+            box-shadow: 0 0 10px rgba(157, 78, 237, 0.2);
+        }
+
+        .nav-btn {
+            background: #222;
+            border: none;
+            color: #fff;
+            padding: 0 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #333;
+        }
+
+        /* Viewport */
+        #viewport-container {
+            flex: 1;
+            position: relative;
+            background: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        iframe.active {
+            display: block;
+        }
+
+        .back-home {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            margin-right: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .back-home:hover {
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
-    <a href="/" class="back-btn">Back Home</a>
-
-    <div id="controls">
-        <input type="text" id="bar">
-        <button onclick="nav()">Go</button>
+    <div class="tab-bar" id="tab-bar">
+        <a href="/" class="back-home">BACK HOME</a>
+        <!-- Tabs injected here -->
+        <button class="new-tab-btn" onclick="addTab()">+</button>
     </div>
 
-    <iframe src="about:blank" id="frame"></iframe>
+    <div class="address-bar-container">
+        <button class="nav-btn" onclick="goBack()">←</button>
+        <button class="nav-btn" onclick="goForward()">→</button>
+        <input type="text" id="bar" placeholder="Enter URL or search...">
+        <button class="nav-btn" onclick="nav()" style="background: #9d4edd; font-weight: bold;">GO</button>
+    </div>
+
+    <div id="viewport-container">
+        <!-- Iframes injected here -->
+    </div>
 
     <script>
-        const frame = document.getElementById("frame");
+        const tabBar = document.getElementById("tab-bar");
         const bar = document.getElementById("bar");
+        const viewportContainer = document.getElementById("viewport-container");
+
+        let tabs = [];
+        let activeTabId = null;
 
         const wispUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/wisp/";
-
         const connection = new BareMux.BareMuxConnection("/sail/baremux/worker.js")
         connection.setTransport("/sail/libcurl/index.mjs", [{ websocket: wispUrl }])
 
         const { ScramjetController } = $scramjetLoadController()
         const scramjet = new ScramjetController({
-            files: {
-                all: "/sail/scram/scramjet.all.js",
-                wasm: "/sail/scram/scramjet.wasm.wasm",
-                sync: "/sail/scram/scramjet.sync.js"
-            },
+            files: { all: "/sail/scram/scramjet.all.js", wasm: "/sail/scram/scramjet.wasm.wasm", sync: "/sail/scram/scramjet.sync.js" },
             prefix: "/sail/go/"
-        })
-        scramjet.init()
+        });
+        scramjet.init();
+
+        function addTab(url = "about:blank") {
+            const id = "tab-" + Date.now();
+            const tabObj = { id, title: "New Tab", url: url };
+            tabs.push(tabObj);
+
+            // Create Tab Element
+            const tabEl = document.createElement("div");
+            tabEl.className = "tab";
+            tabEl.id = "btn-" + id;
+            tabEl.onclick = () => switchTab(id);
+            tabEl.innerHTML = `
+                <span class="tab-title">New Tab</span>
+                <span class="tab-close" onclick="closeTab(event, '${id}')">×</span>
+            `;
+            tabBar.insertBefore(tabEl, tabBar.querySelector(".new-tab-btn"));
+
+            // Create Iframe
+            const iframe = document.createElement("iframe");
+            iframe.id = "frame-" + id;
+            iframe.src = url !== "about:blank" ? scramjet.encodeUrl(formatUrl(url)) : "about:blank";
+            viewportContainer.appendChild(iframe);
+
+            switchTab(id);
+        }
+
+        function switchTab(id) {
+            tabs.forEach(t => {
+                const btn = document.getElementById("btn-" + t.id);
+                const frame = document.getElementById("frame-" + t.id);
+                if (t.id === id) {
+                    btn.classList.add("active");
+                    frame.classList.add("active");
+                    bar.value = t.url === "about:blank" ? "" : t.url;
+                } else {
+                    btn.classList.remove("active");
+                    frame.classList.remove("active");
+                }
+            });
+            activeTabId = id;
+        }
+
+        function closeTab(event, id) {
+            event.stopPropagation();
+            if (tabs.length === 1) return; // Keep at least one tab
+
+            const index = tabs.findIndex(t => t.id === id);
+            tabs.splice(index, 1);
+
+            document.getElementById("btn-" + id).remove();
+            document.getElementById("frame-" + id).remove();
+
+            if (activeTabId === id) {
+                const nextTab = tabs[index] || tabs[index - 1];
+                switchTab(nextTab.id);
+            }
+        }
 
         function formatUrl(url) {
-            if (!url) return "";
+            if (!url || url === "about:blank") return "";
             if (!url.includes(".")) {
                 return "https://search.brave.com/search?q=" + encodeURIComponent(url);
             } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -95,22 +284,37 @@
             return url;
         }
 
-        function nav(targetUrl) {
-            let url = targetUrl || bar.value.trim();
+        function nav() {
+            if (!activeTabId) return;
+            const url = bar.value.trim();
             if (!url) return;
-            frame.src = scramjet.encodeUrl(formatUrl(url));
+
+            const tab = tabs.find(t => t.id === activeTabId);
+            tab.url = url;
+
+            const frame = document.getElementById("frame-" + activeTabId);
+            const encoded = scramjet.encodeUrl(formatUrl(url));
+            frame.src = encoded;
+
+            // Simple title update logic
+            document.querySelector(`#btn-${activeTabId} .tab-title`).textContent = url.split('/')[2] || url;
         }
+
+        function goBack() {
+            const frame = document.getElementById("frame-" + activeTabId);
+            frame.contentWindow.history.back();
+        }
+        function goForward() {
+            const frame = document.getElementById("frame-" + activeTabId);
+            frame.contentWindow.history.forward();
+        }
+
+        bar.addEventListener("keydown", (e) => { if (e.key === "Enter") nav(); });
 
         window.addEventListener("load", () => {
             const params = new URLSearchParams(window.location.search);
             const go = params.get("go");
-            if (go) {
-                nav(go);
-            }
-        });
-
-        bar.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") nav();
+            addTab(go || "about:blank");
         });
     </script>
 </body>

@@ -4,90 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>404 - Matrix Failure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
+        @keyframes glitch {
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 2px)
+            }
+
+            40% {
+                transform: translate(-2px, -2px)
+            }
+
+            60% {
+                transform: translate(2px, 2px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
+        }
+
         :root {
             --primary: #9d4edd;
             --primary-hover: #c77dff;
-            --primary-light: rgba(157, 78, 237, 0.1);
             --background: #000000;
             --surface: #0a0a0a;
             --text-primary: #ffffff;
             --text-secondary: #888;
             --border: #240046;
-            --shadow: 0 0 20px rgba(157, 78, 237, 0.2);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
+            --shadow: 0 0 30px rgba(157, 78, 237, 0.3);
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             background-color: var(--background);
             color: var(--text-primary);
-            position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            background: radial-gradient(circle at center, #15002b 0%, #000 100%);
         }
 
         .container {
             text-align: center;
-            padding: 2rem;
-            z-index: 10;
+            padding: 4rem;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
 
         .error-code {
-            font-size: 8rem;
+            font-size: 10rem;
             font-weight: 900;
-            color: var(--primary);
-            text-shadow: 0 0 30px var(--primary);
-            margin-bottom: 1rem;
-            letter-spacing: -5px;
+            color: #fff;
+            text-shadow: 2px 2px #9d4edd, -2px -2px #c77dff;
+            margin-bottom: 0.5rem;
+            animation: glitch 0.3s infinite;
         }
 
         .error-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 5px;
+            color: var(--primary);
         }
 
         .error-message {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 400px;
+            margin-bottom: 3rem;
+            max-width: 450px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .home-link {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 15px 40px;
             background: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            box-shadow: 0 0 15px rgba(157, 78, 237, 0.3);
+            letter-spacing: 2px;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(157, 78, 237, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .home-link:hover {
             background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--primary);
         }
 
         .hidden {
@@ -97,44 +123,31 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- 404 Error Content -->
-        <div id="error-content" class="animate__animated animate__fadeIn">
+    <div class="container animate__animated animate__zoomIn">
+        <div id="error-content">
             <h1 class="error-code">404</h1>
-            <h2 class="error-title">Page Not Found</h2>
-            <p class="error-message">It looks like you've mistyped a link or the page you're looking for doesn't exist.
-            </p>
-            <center>
-                <a href="javascript:void(0)" onclick="gohome();" class="home-link">Return to Home</a>
-            </center>
-        </div>
-        <div class="container">
-            <!-- Proxy Loading Content -->
-            <div id="proxy-content" class="animate__animated animate__fadeIn hidden">
-                <center>
-                    <h1 class="error-code">;)</h1>
-                    <h2 class="error-title">Waking up server.</h2>
-                    <p class="error-message">If you aren't redirected after 10 seconds, please click the button below.
-                    </p>
-                    <form id="regform">
-                        <button class="button" type="submit" onclick="window.location.reload(1);">
-                            Start up Proxy
-                        </button>
-                    </form>
-                </center>
-                <div class="dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
+            <h2 class="error-title">Matrix Failure</h2>
+            <p class="error-message">Connection to requested node lost. The data stream has been interrupted by an
+                unknown anomaly.</p>
+            <a href="javascript:void(0)" onclick="gohome();" class="home-link">Reconnect to Core</a>
         </div>
 
-        <script>
-            if (window.location.href.includes("/service/") || window.location.href.includes("/go/") || window.location.href.includes("/tiny/")) { document.getElementById("error-content").classList.add("hidden"); document.getElementById("proxy-content").classList.remove("hidden") }
-            function gohome() { window.location.href = window.location.origin }
-        </script>
+        <div id="proxy-content" class="hidden">
+            <h1 class="error-code">;)</h1>
+            <h2 class="error-title">Initializing Link</h2>
+            <p class="error-message">Bypassing security protocols. Establishing quantum connection...</p>
+            <button class="home-link" onclick="window.location.reload(1);"
+                style="cursor:pointer; border:none;">Establish Now</button>
+        </div>
+    </div>
 
+    <script>
+        if (window.location.href.includes("/service/") || window.location.href.includes("/go/") || window.location.href.includes("/tiny/")) {
+            document.getElementById("error-content").classList.add("hidden");
+            document.getElementById("proxy-content").classList.remove("hidden");
+        }
+        function gohome() { window.location.href = window.location.origin }
+    </script>
 </body>
 
 </html>
