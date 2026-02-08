@@ -186,7 +186,6 @@
             line-height: 1.3;
             margin-bottom: 4px;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden
         }
@@ -366,13 +365,12 @@
                     <div class="zone-badge">${item.source.toUpperCase()}</div>
                     <div class="zone-thumbnail-wrap">
                         <img src="${item.displayCover}" loading="lazy" onerror="this.src='/logo.png'">
-                        <div class="zone-duration">${duration}</div>
+                     
                     </div>
                     <div class="zone-info">
                         <div class="zone-name">${item.name}</div>
                         <div class="zone-meta">
-                            <span>${views}K views</span> • <span>98%</span> 
-                            <span class="verified-icon">✔</span>
+
                         </div>
                     </div>
                 `; container.appendChild(div)
