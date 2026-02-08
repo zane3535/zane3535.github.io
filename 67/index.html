@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,23 +11,58 @@
         navigator.serviceWorker.register("/sail/sw.js")
     </script>
     <style>
-        body { margin: 0; overflow: hidden; }
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
         iframe {
             height: 100vh;
             width: 100vw;
             background: #cfcfcf;
             border: none;
         }
-        #controls { display: none; }
+
+        #controls {
+            display: none;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #9d4edd;
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+            z-index: 10000;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(157, 78, 237, 0.4);
+        }
+
+        .back-btn:hover {
+            background: #c77dff;
+            transform: scale(1.05);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
+
 <body>
+    <a href="/" class="back-btn">Back Home</a>
 
     <div id="controls">
         <input type="text" id="bar">
         <button onclick="nav()">Go</button>
     </div>
-    
+
     <iframe src="about:blank" id="frame"></iframe>
 
     <script>
@@ -34,7 +70,7 @@
         const bar = document.getElementById("bar");
 
         const wispUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/wisp/";
-        
+
         const connection = new BareMux.BareMuxConnection("/sail/baremux/worker.js")
         connection.setTransport("/sail/libcurl/index.mjs", [{ websocket: wispUrl }])
 
@@ -76,6 +112,7 @@
         bar.addEventListener("keydown", (e) => {
             if (e.key === "Enter") nav();
         });
-    </script>  
+    </script>
 </body>
+
 </html>

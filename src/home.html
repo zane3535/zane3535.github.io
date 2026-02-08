@@ -7,7 +7,8 @@
     <title>home & pr0xy</title>
     <style>
         :root {
-            --orange: #f7971d;
+            --accent: #9d4edd;
+            --accent-glow: #c77dff;
             --bg-dark: #000000;
         }
 
@@ -20,8 +21,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: calc(100vh - 65px);
             overflow: hidden;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
         }
 
 
@@ -46,11 +48,13 @@
         }
 
         .hub-box {
-            background-color: var(--orange);
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 8px;
-            margin-left: 4px;
+            background-color: var(--accent);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 6px;
+            box-shadow: 0 0 20px rgba(157, 78, 237, 0.4);
+            text-transform: uppercase;
         }
 
         p {
@@ -105,7 +109,8 @@
         }
 
         .neon-input:focus {
-            border-color: var(--orange);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
         }
 
         .neon-button {

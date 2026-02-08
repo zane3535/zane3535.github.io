@@ -7,18 +7,18 @@
     <title>Home - Classroom</title>
     <style>
         :root {
-            --primary: #f7971d;
-            --primary-hover: #ffac33;
-            --primary-light: rgba(247, 151, 29, 0.2);
-            --accent: #ff9100;
+            --primary: #9d4edd;
+            --primary-hover: #c77dff;
+            --primary-light: rgba(157, 78, 237, 0.2);
+            --accent: #7b2cbf;
             --bg: #000000;
-            --surface: #000000;
-            --border: #1b1b1b;
+            --surface: #0a0a0a;
+            --border: #240046;
             --text: #ffffff;
             --text-muted: #888;
-            --radius: 4px;
-            --shadow-glow: 0 0 10px rgba(0, 0, 0, 0.5);
-            --warning-red: #cc0000
+            --radius: 6px;
+            --shadow-glow: 0 0 15px rgba(157, 78, 237, 0.3);
+            --warning-red: #5a189a
         }
 
         body {
@@ -31,8 +31,9 @@
         }
 
         header {
-            background: #1b1b1b;
-            border-bottom: 1px solid #333;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100
@@ -177,7 +178,7 @@
         }
 
         .verified-icon {
-            color: #2196F3;
+            color: var(--primary);
             font-size: 12px
         }
 
@@ -219,8 +220,9 @@
         }
 
         .zone-header {
-            background: #1b1b1b;
-            border-bottom: 1px solid #333;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--border);
             padding: .8rem 1.5rem;
             display: flex;
             align-items: center;
