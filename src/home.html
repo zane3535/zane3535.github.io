@@ -1,22 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home & pr0xy</title>
     <style>
         :root {
-            --neon-pink: #ff00ff;
-            --neon-blue: #00f2ff;
-            --bg-dark: #0a0a0c;
+            --orange: #f7971d;
+            --bg-dark: #000000;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-blue);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            font-family: Arial, Helvetica, sans-serif;
             color: white;
             display: flex;
             justify-content: center;
@@ -25,17 +24,7 @@
             overflow: hidden;
         }
 
-        body::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(18, 18, 20, 0.8) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(18, 18, 20, 0.8) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
+
 
         .container {
             text-align: center;
@@ -43,27 +32,32 @@
         }
 
         h1 {
-            font-size: 5rem;
-            text-transform: uppercase;
+            font-size: 4rem;
             margin: 0;
             color: #fff;
-            text-shadow: 
-                0 0 7px #fff,
-                0 0 10px #fff,
-                0 0 21px var(--neon-red),
-                0 0 42px var(--neon-red),
-                0 0 82px var(--neon-red);
-                letter-spacing: 5px;
-            animation: flicker 2s infinite alternate;
+            letter-spacing: -2px;
+            font-weight: bold;
+        }
+
+        .hub-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .hub-box {
+            background-color: var(--orange);
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 8px;
+            margin-left: 4px;
         }
 
         p {
             font-size: 1.2rem;
-            color: var(--neon-red);
-            text-shadow: 0 0 10px var(--neon-blue);
-            margin-top: 1rem;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            color: #ccc;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
         }
 
         .neon-button {
@@ -100,71 +94,34 @@
 
         .neon-input {
             padding: 15px;
-            background: transparent;
+            background: #1b1b1b;
             color: white;
-            border: 2px solid var(--neon-blue);
+            border: 2px solid #333;
             font-size: 1rem;
-            width: 300px;
-            box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-orange);
+            width: 400px;
             border-radius: 5px;
             outline: none;
+            transition: border-color 0.3s;
         }
 
         .neon-input:focus {
-            box-shadow: 0 0 30px var(--neon-blue);
+            border-color: var(--orange);
         }
 
         .neon-button {
             margin-left: 10px;
         }
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                text-shadow: 
-                    0 0 7px #fff,
-                    0 0 10px #fff,
-                    0 0 21px var(--neon-red),
-                    0 0 42px var(--neon-maroon),
-                    0 0 82px var(--neon-purple);
-            }
-            20%, 24%, 55% {       
-                text-shadow: none;
-            }
-        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
-        <h1>Welcome To <span style="color: var(--neon-red);">Zane G@mez</span></h1>
-        <p>cool g@me site!</p>
-        <p>Select an option on the nav bar or use our Pr0xy! and press shift ctrl r if proxy dont work!nd some games dont work</p>
-        
-        <div class="search-container">
-            <form id="search-form">
-                <input type="text" id="search-input" class="neon-input" placeholder="Search Google or enter URL..." autocomplete="off">
-            </form>
-        </div>
+        <h1>Welcome To <span class="hub-logo">Zane <span class="hub-box">G@MEZ</span></span></h1>
+        <p>The #1 G@me Site!</p>
+        <p>Select a category from the top menu or search globally to start playing.</p>
     </div>
 
-    <script>
-
-        //recycled from UBX with permission
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const input = document.getElementById('search-input').value.trim();
-            if (input) {
-               
-                const isUrl = /^https?:\/\//.test(input) || /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(input) && !/\s/.test(input);
-                if (isUrl) {
-                    window.location.href = `/67?go=${encodeURIComponent(input)}`;
-                } else {
-                
-                    window.location.href = `/67?go=https://www.google.com/search?q=${encodeURIComponent(input)}`;
-                }
-            }
-        });
-    </script>
-
 </body>
+
 </html>

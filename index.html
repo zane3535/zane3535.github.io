@@ -1,198 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Zane Gamez</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="UH4TWQbIOPSWvnFyIykY8XlsFwkDltZ7qeNsO0-moHM" />
-<meta name="google-site-verification" content="CFJpG9eFtNxnrjtYqys5twLUqpUgLZF9tIbMr-TxlFw" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMCE2493MV"></script>
-<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FMCE2493MV');
-</script>
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Inter, system-ui, Arial, sans-serif;
-  }
+  <meta charset="UTF-8">
+  <title>Zane Gamez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="UH4TWQbIOPSWvnFyIykY8XlsFwkDltZ7qeNsO0-moHM" />
+  <meta name="google-site-verification" content="CFJpG9eFtNxnrjtYqys5twLUqpUgLZF9tIbMr-TxlFw" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMCE2493MV"></script>
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-FMCE2493MV');
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  body {
-    height: 100vh;
-    background: radial-gradient(circle at top left, #1a2cff, #070b1f 70%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+    body {
+      height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-  .app {
-    width: 96vw;
-    height: 92vh;
-    display: flex;
-    gap: 20px;
-  }
+    /* Header Styles */
+    .header {
+      background: #1b1b1b;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 20px;
+      border-bottom: 1px solid #333;
+      z-index: 1000;
+    }
 
-  .navbar {
-    width: 90px;
-    background: linear-gradient(180deg, #0b102f, #06091f);
-    border-radius: 24px;
-    padding: 16px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    box-shadow:
-      0 0 25px rgba(0, 150, 255, 0.35),
-      inset 0 0 18px rgba(0, 150, 255, 0.15);
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      min-width: fit-content;
+    }
 
-  .nav-btn {
-    width: 56px;
-    height: 56px;
-    background: rgba(0, 180, 255, 0.12);
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 12px rgba(0, 180, 255, 0.4);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
+    .logo-box {
+      background: #f7971d;
+      color: #000;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 2px;
+    }
 
-  .nav-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 18px rgba(0, 220, 255, 0.7);
-  }
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      display: flex;
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 4px;
+      overflow: hidden;
+    }
 
-  .nav-btn svg {
-    width: 26px;
-    height: 26px;
-    fill: #9be7ff;
-  }
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      outline: none;
+      font-size: 14px;
+    }
 
-  .apps {
-    margin-top: 6px;
-    display: grid;
-    grid-template-columns: repeat(2, 16px);
-    gap: 14px;
-  }
+    .search-bar button {
+      background: #f7971d;
+      border: none;
+      padding: 0 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-  .app-dot {
-    width: 16px;
-    height: 16px;
-    background: radial-gradient(circle, #9be7ff, #00baff);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 10px #00baff;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
 
-  .app-dot:hover {
-    transform: scale(1.25);
-    box-shadow: 0 0 16px #5fe0ff;
-  }
+    .nav-item {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
 
-  .page {
-    flex: 1;
-    background: linear-gradient(145deg, #0a0f2e, #05081a);
-    border-radius: 32px;
-    overflow: hidden;
-    box-shadow:
-      0 0 40px rgba(120, 0, 255, 0.25),
-      inset 0 0 25px rgba(120, 0, 255, 0.15);
-  }
+    .nav-item:hover {
+      color: #f7971d;
+    }
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: #000;
-  }
+    /* Content Area */
+    .app {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
 
-  .panel {
-    padding: 36px;
-    color: #ccecff;
-  }
+    .page {
+      flex: 1;
+      background: #000;
+    }
 
-  .panel h1 {
-    font-size: 32px;
-    margin-bottom: 14px;
-    color: #7dd3ff;
-    text-shadow: 0 0 12px rgba(0, 180, 255, 0.6);
-  }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #000;
+    }
 
-  .panel p {
-    opacity: 0.9;
-    line-height: 1.6;
-  }
-</style>
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #444;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="app">
+  <header class="header">
+    <div class="logo" onclick="showHome()">ZANE<span class="logo-box">G@MEZ</span></div>
 
-  <div class="navbar">
-
-    <div class="nav-btn" onclick="showHome()">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"/></svg>
+    <div class="search-bar">
+      <input type="text" id="global-search" placeholder="Search videos or enter URL..." autocomplete="off">
+      <button onclick="handleGlobalSearch()">Search</button>
     </div>
 
-    <div class="nav-btn" onclick="showGames()">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M448 64c106 0 192 86 192 192S554 448 448 448l-256 0C86 448 0 362 0 256S86 64 192 64l256 0zM192 176c-13.3 0-24 10.7-24 24l0 32-32 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l32 0 0 32c0 13.3 10.7 24 24 24s24-10.7 24-24l0-32 32 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-32 0 0-32c0-13.3-10.7-24-24-24zm240 96a32 32 0 1 0 0 64 32 32 0 1 0 0-64zm64-96a32 32 0 1 0 0 64 32 32 0 1 0 0-64z"/></svg>
-      </svg>
-    </div>
+    <nav class="nav-links">
+      <div class="nav-item" onclick="showHome()">HOME</div>
+      <div class="nav-item" onclick="showGames()">GAMES</div>
+      <div class="nav-item" onclick="showPartners()">PARTNERS</div>
+      <div class="nav-item" onclick="window.open('https://discord.gg/Egavtd9fN9', '_blank');">DISCORD</div>
+    </nav>
+  </header>
 
-    <div class="nav-btn" onclick="showPartners()">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"/></svg>
-    </div>
+  <div class="app">
+    <div class="page" id="page"></div>
+  </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const page = document.getElementById("page");
 
-<div class="nav-btn" onclick="window.open('https://discord.gg/Egavtd9fN9', '_blank');">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1 .1s-.6 .4-.8 .8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2c-41.3 7.1-81.6 19.6-119.7 37.1-.3 .1-.6 .4-.8 .7-76.2 113.8-97.1 224.9-86.9 334.5 0 .3 .1 .5 .2 .8s.3 .4 .5 .6c44.4 32.9 94 58 146.8 74.2 .4 .1 .8 .1 1.1 0s.7-.4 .9-.7c11.3-15.4 21.4-31.8 30-48.8 .1-.2 .2-.5 .2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6 .2-.9 .3-.5 .6-.7c3.1-2.3 6.2-4.7 9.1-7.1 .3-.2 .6-.4 .9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1 .7-.2 1-.2s.7 .2 .9 .4c2.9 2.4 6 4.9 9.1 7.2 .2 .2 .4 .4 .6 .7s.2 .6 .2 .9-.1 .6-.3 .9-.4 .5-.6 .6c-14.7 8.6-30 15.9-45.9 21.8-.2 .1-.5 .2-.7 .4s-.3 .4-.4 .7-.1 .5-.1 .8 .1 .5 .2 .8c8.8 17 18.8 33.3 30 48.8 .2 .3 .6 .6 .9 .7s.8 .1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2 .2-.2 .4-.4 .5-.6s.2-.5 .2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2zm195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2z"/></svg>
-    </div>
-</div>
-  <div class="page" id="page"></div>
+      window.loadGame = function (file) {
+        page.innerHTML = "";
+        const iframe = document.createElement("iframe");
 
-</div>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const page = document.getElementById("page");
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.allowFullscreen = true;
+        iframe.src = file;
 
-    window.loadGame = function (file) {
-      page.innerHTML = "";
-      const iframe = document.createElement("iframe");
+        page.appendChild(iframe);
+      };
 
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      iframe.allowFullscreen = true;
+      window.showHome = () => loadGame("/src/home.html");
+      window.showGames = () => loadGame("/src/games.html");
+      window.showPartners = () => loadGame("/src/partners.html");
 
-      // navigate iframe directly to the local file so relative paths resolve correctly
-      iframe.src = file;
-      iframe.addEventListener('error', () => {
-        console.error('Error loading game:', file);
-        page.innerHTML = "Failed to load content.";
+      window.handleGlobalSearch = function () {
+        const input = document.getElementById('global-search').value.trim();
+        if (input) {
+          const isUrl = /^https?:\/\//.test(input) || /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(input) && !/\s/.test(input);
+          if (isUrl) {
+            window.location.href = `/67?go=${encodeURIComponent(input)}`;
+          } else {
+            window.location.href = `/67?go=https://www.google.com/search?q=${encodeURIComponent(input)}`;
+          }
+        }
+      };
+
+      document.getElementById('global-search').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleGlobalSearch();
       });
 
-      page.appendChild(iframe);
-    };
-
-    window.showHome = () => loadGame("/src/home.html");
-    window.showGames = () => loadGame("/src/games.html");
-    window.showPartners = () => loadGame("/src/partners.html");
-
-    showHome();
-  });
-</script>
+      showHome();
+    });
+  </script>
 
 </body>
+
 </html>
